@@ -397,3 +397,30 @@ might want to prove $\neg\psi\implies\neg\phi$) or proof by
 contradiction (i.e., instead of $\phi$, you want to prove
 $\neg\phi\implies\bot$). Almost always, you want to go back to the
 definitions, and just keep unfolding definitions until you are finished.
+
+\begin{xca}
+Suppose we have three propositions $A$, $B$, $C$. If we have proven
+$A\iff B$ and $B\iff C$ are true, is $A\iff C$ true?
+\end{xca}
+
+\begin{xca}
+De Morgan's laws say $\neg(A\land B)=(\neg A)\lor(\neg B)$. Prove this
+is valid (which is to say, write down its truth table).
+\end{xca}
+
+\begin{xca}
+Let $\phi[x]$, $\psi$ be propositions. Assume $x$ does not appear at all
+in $\psi$.
+\begin{enumerate}
+\item Prove $(\forall x,\phi[x])\implies\psi$ is logically
+equivalent to $\exists x,(\phi[x]\implies\psi)$.
+\item Prove $\psi\implies(\forall x,\phi[x])$ is logically equivalent to
+  $\forall x,(\psi\implies\phi[x])$.
+\item Suppose $\phi[x]$ depends on $x$ now. Is it true that $\forall x,(\phi[x]\iff\psi[x])$
+  is logically equivalent to $(\forall x,\phi[x])\iff(\forall y,\psi[y])$?
+\end{enumerate}
+\end{xca}
+
+
+
+

@@ -1,5 +1,13 @@
 \section{Enumerated Sets}
 
+We begin by noting there exists a pair. This is taken as an axiom of ZFC
+set theory (and all set theories mentioned in the introduction).
+
+\begin{axiom}[Pair]\label{axiom:pair}
+For any sets $X$ and $Y$, there exists a set $Z$ such that for all
+objects $x$ we have $x\in Z$ if and only if $x=X$ or $x=Y$.
+\end{axiom}
+
 \begin{definition}
 Let $y$ be any object. We define the term $\{y\}$ to be the set
 satisfying
@@ -8,6 +16,50 @@ satisfying
 \end{equation}
 \end{definition}
 
+We need to prove the existence and uniqueness of $\{y\}$.
+
+\begin{theorem}[Existence]
+For any object $x$, there exists a set $A$ such that for all objects $y$
+we have $y\in B$ if and only if $y=x$.
+\end{theorem}
+
+In other words, there exists at least one set $B$ which behaves like $\{x\}$.
+This is actually proven immediately by Axiom~\ref{axiom:pair}.
+
+\begin{proof}
+Let $x$ be an object. Consider $A$ being a set such that
+\begin{equation}
+\mbox{For all objects $y$, }y\in A\iff y=x\mbox{ or }y=x
+\end{equation}
+by Axiom~\ref{axiom:pair}. Take $A$.
+Thus for all objects $y$ we have $y\in A$ if and only if $y=x$.
+\end{proof}
+
+\begin{theorem}[Uniqueness]
+Let $x$ be any object. For all sets $A$ and $B$ such that for all
+objects $y_{1}$ we have $y_{1}\in A$ if and only if $y_{1}=x$, and
+separately for all objects $y_{2}$ we have $y_{2}\in B$ if and only if $y_{2}=x$.
+Then $A=B$.
+\end{theorem}
+
+This establishes all sets behaving like $\{x\}$ are equal to each other. 
+
+\begin{proof}
+Let $x$ be an object. Let $A$ and $B$ be sets. Assume
+\begin{subequations}\label{eq:uniqueness-of-singleton}
+\begin{equation}
+\mbox{For all objects $y_{1}$, }y_{1}\in A\iff y_{1}=x.
+\end{equation}
+Assume
+\begin{equation}
+\mbox{For all objects $y_{2}$, }y_{2}\in B\iff y_{2}=x.
+\end{equation}
+\end{subequations}
+[Now to prove $A=B$, we just use the definitional theorem Eq~\eqref{eq:def:set-equality}.]
+For all objects $y$, we have $y\in A$ iff $y\in B$ by Eq~\eqref{eq:uniqueness-of-singleton}.
+Hence $A=B$ by Eq~\eqref{eq:def:set-equality}.
+\end{proof}
+
 \begin{definition}
 Let $y$ and $z$ be objects. We define the term $\{y,z\}$ to be the set
 satisfying
@@ -15,6 +67,41 @@ satisfying
 \mbox{for all objects $x$, we have }x\in\{y,z\}\iff x=y\mbox{ or }x=z.
 \end{equation}
 \end{definition}
+
+We need to prove existence and uniqueness of $\{x,y\}$ for any objects
+$x$ and $y$. Existence follows immediately from Axiom~\ref{axiom:pair},
+quite literally they are identical statements. Therefore we only need to
+prove uniqueness.
+
+\begin{theorem}[Uniqueness]
+Let $x$, $y$ be objects. If for all sets $A$ and $B$ such that
+(i) for all objects $a$ we have $a\in A$ iff $a=x$ or $a=y$, and
+separately (ii) for all objects $b$ we have $b\in B$ iff $b=x$ or $b=y$;
+then $A=B$.
+\end{theorem}
+
+We are proving two sets are equal. Since the sets we want to prove are
+equal to each other are defined using the templace ``For all objects $w$,
+we have $w\in X$ iff $\mathcal{P}[w]$'' for some predicate $\mathcal{P}[-]$,
+it will be advantageous to use the definitional-theorem Eq~\eqref{eq:def:set-equality}.
+
+\begin{proof}
+Let $x$, $y$ be objects. Let $A$ and $B$ be sets. Assume
+\begin{subequations}\label{enumerated-set:pf:uniqueness-pair}
+\begin{equation}
+\mbox{for all objects $a$ we have $a\in A$ iff $a=x$ or $a=y$}.
+\end{equation}
+Assume
+\begin{equation}
+\mbox{for all objects $b$ we have $b\in B$ iff $b=x$ or $b=y$}.
+\end{equation}
+\end{subequations}
+[We want to prove $A=B$.]
+Now let $z$ be an arbitrary object. We have $z\in A$ iff $z=x$ or $z=y$
+by assumption.
+Then we have $z\in B$ iff $z\in A$ by assumptions~\eqref{enumerated-set:pf:uniqueness-pair}.
+Hence $A=B$ by definitional-theorem Eq~\eqref{eq:def:set-equality}.
+\end{proof}
 
 \begin{proposition}
 For any object $x$, we have $\{x\}=\{x,x\}$.

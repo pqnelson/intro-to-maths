@@ -1,0 +1,116 @@
+\section{Intersections of Sets}
+
+Dual to unions ``combining'' sets together, we can consider the
+intersection or ``largest common subset'' between two sets. Before
+jumping to the fun parts, we need to introduce some preliminary notions.
+
+We begin by introducing a new variant of a theorem called a
+\define{scheme}. It's like a theorem, but we allow arbitrary predicates
+or terms which we indicate using caligraphic font (e.g., $\mathcal{P}$,
+$\mathcal{F}$, $\mathcal{X}$, etc.). This is an axiom scheme for set
+theory. 
+
+\begin{axiom-scheme}[Replacement]\label{sch:bool:replacement}
+Let $\mathcal{P}[-]$ be a unary predicate of sets, let $\mathcal{A}$ be
+a set.
+There exists a set $X$ such that for all objects $x$ we have $x\in X$ if
+and only if $x\in\mathcal{A}$ and $\mathcal{P}[x]$.
+\end{axiom-scheme}
+
+This is usally taken as an axiom in ZFC set theory. In
+Tarski--Grothendieck set theory, it can be derived as a theorem. We will
+accept it as an axiom: for any set $\mathcal{A}$ and predicate
+$\mathcal{P}[-]$, we can form a subset of $\mathcal{A}$ consisting of
+its elements which satisfy $\mathcal{P}[-]$. This makes sense.
+
+\begin{definition}
+Let $A$ and $B$ be sets. We define the term $A\cap B$ to be the set
+satisfying
+\begin{equation}
+\mbox{For all objects $x$, }x\in A\cap B\iff x\in A\mbox{ and }x\in B.
+\end{equation}
+\end{definition}
+
+Having just defined a new term, we now must prove existence and
+uniqueness.
+
+\begin{theorem}[Existence of $\cap$]
+Let $A$ and $B$ be sets. There exists a set $X$ such that for all
+objects $x$ we have $x\in X$ if and only if $x\in A$ and $x\in B$.
+\end{theorem}
+
+We can use Axiom Scheme~\ref{sch:bool:replacement} to consider the
+subset of $A$ consisting of elements of $B$.
+
+\begin{proof}
+Let $A$ and $B$ be sets. We define the predicate $\mathcal{P}[x]:=x\in B$.
+Then there exists a set $X$ such that for all objects $x$ we have $x\in X$
+if and only if $x\in A$ and $\mathcal{P}[x]$ (i.e., $x\in A$ and $x\in B$).
+Hence there exists a set satisfying the definitional theorem for set
+intersections. 
+\end{proof}
+
+\begin{theorem}[Uniqueness of $\cap$]
+Let $A$ and $B$ be sets.
+For any sets $X$, $Y$ such that (i) for all objects $x$ we have $x\in X$
+if and only if $x\in A$ and $x\in B$, and (ii) for all objects $y$ we
+have $y\in Y$ if and only if $y\in A$ and $y\in B$;
+then we have $X=Y$.
+\end{theorem}
+
+\begin{proof}
+Let $A$ and $B$ be sets. Let $X$ and $Y$ be sets. Assume
+\begin{subequations}
+  \begin{equation}
+\mbox{for all objects $x$ we have $x\in X$ if and only if $x\in A$ and $x\in B$.}
+  \end{equation}
+  Assume
+  \begin{equation}
+\mbox{for all objects $y$ we have $y\in Y$ if and only if $y\in A$ and $y\in B$}.
+  \end{equation}
+\end{subequations}
+[We will use the definitional-theorem Eq~\eqref{eq:def:set-equality} for
+set equality.]
+Now let $x$ be an arbitrary object. We have $x\in X$ iff $x\in A$ and
+$x\in B$ by assumption. Then we have $x\in X$ iff $x\in Y$.
+Since this is true for arbitrary $x$, we have just established ``For any
+object $x$, we have $x\in X$ iff $x\in Y$''. Therefore, by Eq~\eqref{eq:def:set-equality},
+we have $X=Y$.
+\end{proof}
+
+\begin{proposition}
+For any sets $X$, $Y$, $Z$ we have $X\cap(Y\cap Z)=(X\cap Y)\cap Z$.
+\end{proposition}
+
+\begin{xca}
+Prove: for any set $X$, we have $X\cap X=X$.
+\end{xca}
+
+\begin{xca}
+Prove: For any sets $X$ and $Y$, we have $X\cap Y=Y\cap X$.
+\end{xca}
+
+\begin{xca}
+Prove or find a counter-example: for any sets $X$, $Y$, $Z$, if
+$X\subset Y\cap Z$, then $X\subset Y$.
+\end{xca}
+
+\begin{xca}
+Prove or find a counter-example: for any sets $X$, $Y$, $Z$, if
+$Z\subset X$ and $Z\subset Y$, then $Z\subset X\cap Y$.
+\end{xca}
+
+\begin{xca}
+Prove or find a counter-example: for any sets $X$, $Y$, $Z$,
+we have $X\cap(Y\cup Z)=(X\cap Y)\cup(X\cap Z)$.
+\end{xca}
+
+\begin{xca}
+Prove or find a counter-example: for any sets $X$, $Y$, $Z$,
+we have $X\cup(Y\cap Z)=(X\cup Y)\cap(X\cup Z)$.
+\end{xca}
+
+\begin{xca}
+Prove or find a counter-example: for any sets $X$ and $Y$, if $X\subset Y$,
+then $X\cap Y=X$.
+\end{xca}

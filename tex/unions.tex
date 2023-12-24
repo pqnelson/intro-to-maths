@@ -1,0 +1,178 @@
+\section{Unions of Sets}
+
+\begin{definition}
+Let $X$ and $Y$ be sets.
+We define the term $X\cup Y$ (pronounced ``The union of $X$ and $Y$'')
+to be the set satisfying
+\begin{equation}\label{eq:def:unions:cup}
+\mbox{For all objects $x$, }x\in X\cup Y\iff x\in X\mbox{ or }x\in Y.
+\end{equation}
+\end{definition}
+
+Intuitively, $X\cup Y$ is the set obtained by combining the two sets $X$
+and $Y$ together. We have just introduced a new term, now we need to
+prove it is well-defined, i.e., we need to prove existence and
+uniqueness. This is a direct consequence of a later proposition
+(Proposition~\ref{prop:unions:compatible}) in this section, so we will
+provisionally accept its existence and uniqueness.
+
+\begin{theorem}[Associativity of union]
+For any sets $X$, $Y$, $Z$, we have $(X\cup Y)\cup Z=X\cup(Y\cup Z)$.
+\end{theorem}
+
+This requires proving set equality, which can be done using
+Proposition~\ref{prop:subsets:equiv-set-equality} to require us to prove
+$(X\cup Y)\cup Z\subset X\cup(Y\cup Z)$ and $X\cup(Y\cup Z)\subset(X\cup Y)\cup Z$.
+Each inclusion can be done by going back to the definitional theorem for
+$\cup$.
+
+\begin{proof}
+Let $X$, $Y$, $Z$ be sets.
+
+Claim 1: $(X\cup Y)\cup Z\subset X\cup(Y\cup Z)$. It suffices to prove,
+for any object $x$, if $x\in (X\cup Y)\cup Z$, then $x\in X\cup(Y\cup Z)$.
+\begin{proof}[Subproof]
+Let $x$ be an object. Assume $x\in (X\cup Y)\cup Z$.
+Then by Eq~\eqref{eq:def:unions:cup}, $x\in(X\cup Y)$ or $x\in Z$.
+Then from $x\in X\cup Y$ and Eq~\eqref{eq:def:unions:cup}, we see $x\in X$
+or $x\in Y$ or $x\in Z$.
+Then applying Eq~\eqref{eq:def:unions:cup}, we see $x\in X$ or $x\in Y\cup Z$.
+Hence, by applying Eq~\eqref{eq:def:unions:cup} once more, we see $x\in X\cup(Y\cup Z)$.
+\end{proof}
+
+Claim 2: $X\cup(Y\cup Z)\subset(X\cup Y)\cup Z$. Again, it suffices to
+prove for any object $x$, if $x\in X\cup(Y\cup Z)$, then $x\in (X\cup Y)\cup Z$.
+\begin{proof}[Subproof]
+Let $x$ be an object. Assume $x\in X\cup(Y\cup Z)$.
+Then by Eq~\eqref{eq:def:unions:cup}, $x\in X$ or $x\in Y\cup Z$.
+Then from $x\in Y\cup Z$ and applying Eq~\eqref{eq:def:unions:cup}, we
+see $x\in X$ or $x\in Y$ or $x\in Z$.
+We then apply Eq~\eqref{eq:def:unions:cup} to see $x\in X\cup Y$ or
+$x\in Z$.
+Hence, by applying Eq~\eqref{eq:def:unions:cup} once more, we see
+$x\in(X\cup Y)\cup Z$.
+\end{proof}
+
+Therefore by Proposition~\ref{prop:subsets:equiv-set-equality} and our
+two claims, we conclude $(X\cup Y)\cup Z=X\cup(Y\cup Z)$.
+\end{proof}
+
+The notation for disjunction of propositions $\phi\lor\psi$ and union
+of sets $A\cup B$ are similar intentionally, because if we have
+$\phi[x]:=x\in A$ and $\psi[x]:=x\in B$, then $\phi[x]\lor\psi[x]$ is
+logically equivalent to $x\in(A\cup B)$. In fact, the algebraic
+identities of set union coincide with identities with disjunction.
+
+
+\begin{xca}
+Prove: for any set $X$, we have $X\cup X=X$.
+\end{xca}
+
+\begin{xca}
+Prove: For any sets $X$ and $Y$, we have $X\cup Y=Y\cup X$.
+\end{xca}
+
+\begin{xca}
+Prove: for any sets $X$, $Y$, $Z$, we have $(X\cup Y)\cup Z=(X\cup Z)\cup(Y\cup Z)$.
+\end{xca}
+
+\begin{xca}
+Prove: For any sets $X$ and $Y$, $X\cup(X\cup Y)=X\cup Y$.
+\end{xca}
+
+\begin{xca}
+Prove: for any sets $X$ and $Y$, we have $X\subset X\cup Y$.
+\end{xca}
+
+\begin{xca}
+For any sets $X$, $Y$, $Z$, if $X\subset Z$ and $Y\subset Z$, then
+$X\cup Y\subset Z$.
+\end{xca}
+
+\begin{xca}
+For any sets $X$, $Y$, $Z$, if $X\subset Y$, then
+$X\cup Z\subset Y\cup Z$.
+\end{xca}
+
+We also have a more general notion of unions, where we have a
+\emph{family} (or collection) of sets $\mathcal{F}$ and we take the
+union of all the members of $\mathcal{F}$.
+
+\begin{definition}
+Let $\mathcal{F}$ be a set.
+We define the term $\union\mathcal{F}$ be the set satisfying
+\begin{equation}\label{eq:def:unions:union-of-family}
+\mbox{For all objects $x$, }x\in\union\mathcal{F}\iff\mbox{There exists a set $X$ such that }x\in X\land X\in\mathcal{F}.
+\end{equation}
+\end{definition}
+
+Do you know what we need to do? First, before anything else, we should
+realize we prove the existence and uniqueness of
+$\union\mathcal{F}$. Before moving to that, I should bring to our
+attention an axiom of ZFC set theory:
+
+\begin{axiom}[Union]\label{axiom:existence-of-union}
+For any set $\mathcal{F}$ there exists a set $A$ such that for any set
+$Y$ and any object $x$, we have $x\in Y$ and $Y\in\mathcal{F}$ if and
+only if $x\in A$.
+\end{axiom}
+
+\begin{theorem}[Existence]
+For any set $\mathcal{F}$, there exists a set $U$ such that for all
+objects $x$ we have $x\in U$ if and only if there exists a set $X$ such
+that $X\in\mathcal{F}$ and $x\in X$.
+
+In other words, for any set $\mathcal{F}$, there exists a set $U$ which
+obeys the definitional theorem for $\union\mathcal{F}$.
+\end{theorem}
+
+\begin{proof}
+Let $\mathcal{F}$ be a set. Thus there exists a set $U$ such that for any
+set $Y$ and any object $x$, we have $x\in Y$ and $Y\in\mathcal{F}$ if
+and only if $x\in U$ by Axiom~\ref{axiom:existence-of-union}.
+\end{proof}
+
+\begin{theorem}[Uniqueness]
+For any set $\mathcal{F}$,
+  for any sets $U_{1}$, $U_{2}$,
+suppose for all objects $x_{1}$ we have $x_{1}\in U_{1}$ if and only if
+there exists a set $X$ such that $X\in\mathcal{F}$ and $x_{1}\in X$;
+and separately suppose for all objects $x_{2}$ we have $x_{2}\in U_{2}$
+if and only if there exists a set $X$ such that $X\in\mathcal{F}$ and
+$x_{2}\in X$. Then $U_{1}=U_{2}$.
+\end{theorem}
+
+In other words, all sets $U$ which satisfy the definitional theorem for
+$\union\mathcal{F}$ are equal to each other. This means, there exists
+exactly one set satisfying the definitional theorem for the term
+$\union\mathcal{F}$. 
+
+We should prove these two notions of unions are ``compatible''.
+\begin{proposition}\label{prop:unions:compatible}
+For any sets $X$ and $Y$, we have $X\cup Y=\union\{X,Y\}$.
+\end{proposition}
+
+We are proving equality of sets, we will also need to recall the
+definitional-theorem for unordered pairs Eq~\eqref{enum:def:unordered-pair}.
+Since we will be working with a number of definitions of the form ``for
+all objects $x$, $x\in A$ iff $\mathcal{P}[x]$'', we should rely on
+Eq~\eqref{eq:def:set-equality} for equality.
+
+\begin{proof}
+Let $X$ and $Y$ be sets.
+For all objects $a$, $a\in X\cup Y$ if and only if $a\in\union\{X,Y\}$.
+\begin{proof}[Subproof]
+Let $a$ be an object.
+
+[We will prove if $a\in X\cup Y$, then $a\in\union\{X,Y\}$.]
+Assume $a\in X\cup Y$. Then $a\in X$ or $a\in Y$ by Eq~\eqref{eq:def:unions:cup}. Then there exists a
+set $Z$ such that $a\in Z$ and $Z\in\{X,Y\}$ by Eq~\eqref{enum:def:unordered-pair}.
+Hence $a\in\union\{X,Y\}$ by Eq~\eqref{eq:def:unions:union-of-family}.
+
+[We will prove if $a\in\union\{X,Y\}$, then $a\in X\cup Y$.]
+Assume $a\in\union\{X,Y\}$. Then there exists a set $Z$ such that
+$Z\in\{X,Y\}$ and $a\in Z$ by Eq~\eqref{eq:def:unions:union-of-family}. Then, by Eq~\eqref{enum:def:unordered-pair},
+either $a\in X$ or $a\in Y$. Hence $a\in X\cup Y$ by Eq~\eqref{eq:def:unions:cup}.
+\end{proof}
+\noindent Hence $X\cup Y=\union\{X,Y\}$ by Eq~\eqref{eq:def:set-equality}.
+\end{proof}

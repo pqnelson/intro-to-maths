@@ -1,28 +1,10 @@
 \section{Boolean Properties of Sets}
 
 \begin{xca}
-Let $\psi$ be any proposition. Write down the proof table for
+Let $\psi$ be any proposition. Write down the truth table for
 $\bot\implies\psi$. You should find this is a tautology (i.e., it is
 always true).
 \end{xca}
-
-We begin by introducing a new variant of a theorem called a
-\define{scheme}. It's like a theorem, but we allow arbitrary predicates
-or terms which we indicate using caligraphic font (e.g., $\mathcal{P}$,
-$\mathcal{F}$, $\mathcal{X}$, etc.).
-
-\begin{scheme}[Replacement]\label{sch:bool:replacement}
-Let $\mathcal{P}[-]$ be a unary predicate of sets, let $\mathcal{A}$ be
-a set.
-There exists a set $X$ such that for all objects $x$ we have $x\in X$ if
-and only if $x\in\mathcal{A}$ and $\mathcal{P}[x]$.
-\end{scheme}
-
-This is usally taken as an axiom in ZFC set theory. In
-Tarski--Grothendieck set theory, it can be derived as a theorem. We will
-accept it as an axiom: for any set $\mathcal{A}$ and predicate
-$\mathcal{P}[-]$, we can form a subset of $\mathcal{A}$ consisting of
-its elements which satisfy $\mathcal{P}[-]$. This makes sense.
 
 \begin{definition}
 Let $X$ be a set. We say $X$ is \define{empty} to mean
