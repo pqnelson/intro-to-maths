@@ -1,0 +1,399 @@
+\section{Introduction}
+
+This section contains more history and attempts to convey the intuition
+behind different aspects of doing mathematics. Don't worry about the
+exact details, the point is to get the ``big picture''.
+
+We describe how ``working mathematicians'' do mathematics, and what that
+entails exactly. This is working in first-order logic, plus some notion
+of ``soft types'' built atop set theory.
+
+\subsection{History: Why Set Theory?}
+Mathematicians in the late 1800s and early 1900s worried about the
+foundations of mathematics. For a variety of reasons\footnote{Like all
+of history, the reasons for this are more randomness and contingency
+than anyone would care to admit. Quine played a role convincing
+philosophers that first-order logic is all we need. But Bourbaki
+arguably played a bigger role by actually writing mathematical proofs
+using first-order logic.}, set theory +
+first-order logic emerged as the choice of foundations. The intuitive
+picture is that set theory and first-order logic acted like the
+``machine code'' (and ``microcode'') of mathematics.
+
+The hope was that we could take any mathematical gadget (like the real
+numbers) and ``build'' a model of them out of sets. Logicians call this
+a ``model'' of the ``theory'' of real numbers. For logicians, the
+``theory'' of real numbers is precisely specified by the ``signature''
+or ``primitive terms'' (constants, terms, and predicates) and ``axioms''
+specifying their behaviour. We can prove theorems using these axioms,
+but these are ``syntactic proofs'' --- just words. If every model of the
+real numbers satisfy these theorems, then the theorems are ``valid''.
+
+What ended up happening is that most mathematicians do not think in this
+manner. Instead, the real numbers \emph{exist} and we can easily play
+with them. Why construct a model of a thing we can directly access and
+manipulate? At the same time, why bother constructing a model of the
+real numbers using sets? We can \emph{directly} access them!
+
+\subsection{Axiomatic Set Theory}
+We will present the basics of set theory as a gateway to mathematical
+proofs. Sets are not ever ``defined'' rigorously. Instead, we provide
+some ``specifications'' for their behaviour. These specifications are
+given the gaudy name ``axioms'', and they specify the behaviour of a
+single predicate denoted $\in$ which roughly has the grammatical form
+\begin{equation}
+\langle\mbox{\textit{object}}\rangle\in\langle\mbox{\textit{set}}\rangle
+\end{equation}
+and this is a proposition capturing the intuition ``(object) is a member
+of (set)'' (or, ``(object) is in (set)''). Here ``object'' refers to any
+mathematical object, and ``set'' refers to anything which obeys the
+behaviour of a set. \textbf{Don't worry too much about these details},
+the meaning will become clear shortly.
+
+\subsubsection{Different Axiomatizations}
+There are many different choices of axioms for set theory. Basically, we
+all share the same intuition of what a set is (it's some kind of
+unordered collection without duplicates). We can all agree on the same
+basic behaviour. Where we disagree, or want different things, is related
+to ``size issues'': we want a suitably large ``collection'' that can act
+like ``the set of all sets''. The basic different choices on the menu of
+axiomatizations are:
+\begin{enumerate}
+\item ZFC (\textbf{Z}ermelo--\textbf{F}raenkel + (axiom of \textbf{C}hoice)):
+  is the ``floor model'' of set theory. All axiomatizations agree
+  ``morally'' with this axiomatization.
+\item NBG (von \textbf{N}eumann--\textbf{B}ernays--\textbf{G}\"{o}del):
+  extends ZFC as conservatively as possible, introducing a new  species
+  of collections (``classes'') which allows us to construct the class of
+  all sets. However, a ``class'' cannot be quantified over, so we cannot
+  make theorems concerning classes.
+\item MK (\textbf{M}orse--\textbf{K}elley): Like NBG, this axiomatizes
+  the notion of classes as well as sets. This is stronger than NBG, but
+  we can quantify over classes, so they act like ``the set of all sets''.
+\item TG (\textbf{T}arski--\textbf{G}rothendieck): If you notice the
+  pattern here, we have a species of collections (let's call them ``coll'').
+  We want to form the collection of all ``coll''s. But this is
+  impossible. So we introduce a new species of collections,
+  ``$\mbox{coll}^{+}$'', to form the collection of all ``coll''s. Pretty
+  soon, we want to form the collection of all ``$\mbox{coll}^{+}$''s. We
+  iterate this procedure, introduce a new species ``$\mbox{coll}^{++}$''.
+  Why not just introduce this procedure and allow us to form any such
+  collection? This is Tarski--Grothendieck set theory in a nutshell.
+\end{enumerate}
+
+\subsubsection{Our choice}
+In this article, we will present ZFC set theory, but treat most of the
+axioms as ``just another definition''. Really, ZFC is the ``floor model''
+in axiomatic set theory. Everything we discuss and prove here will also
+hold in the other axiomatizations we have listed.
+
+\subsubsection{Other foundations?}
+We note there are other possible foundations for mathematics. They don't
+matter too much, since they are just different ways to encode the same
+things we're doing.
+
+For example, higher-order logic amounts to a simply-typed $\lambda$-calculus
+with base types \texttt{prop} for propositions and \texttt{term} for
+objects or terms. We encode logical connectives as functions, and
+quantifiers are then polymorphic functions like
+\begin{equation}
+\mathtt{forall}{:}(\alpha\to\mathtt{prop})\to\mathtt{prop},
+\end{equation}
+it expects a predicate $P{:}\alpha\to\mathtt{prop}$, then produces a
+proposition. However, this predicate may eat in \emph{anything}, not
+just terms. This is why it is ``higher-order''. (``First-order'' refers
+to eating in terms, ``second-order'' allows terms or predicates of
+terms, ``third-order'' extends second-order allowing predicates of
+predicates of terms, etc.)
+
+There is also dependent-type theory, which uses a really complicated
+type system, and encodes propositions as types. Then the terms of these
+``propositions-as-types'' are interpreted as \emph{proofs} of the
+proposition. It's really clever, but beyond our interest. For more on
+this approach to mathematics, the reader can peruse Nick \textsc{de Bruijn}'s
+\Automath\ system and his writings on it.
+
+Observe, these different foundations just provide different ways to
+encode propositions, terms, and proofs. The strategies behind
+\emph{doing mathematics} remains the same, but the ceremonies change.
+In practice, the working mathematician is working with some linear
+combination of these three different foundations.
+
+\subsection{Definitions: Heart of Mathematics}
+One of my professors, Dmitry Fuchs, once said, ``If you \emph{truly}
+understand a definition, then all proofs boil down to exactly three
+words: \emph{it is obvious\/}.'' This is true, but it takes practice to
+(a) learn how to understand definitions, and (b) learn how to ``use''
+definitions. For the remainder of this section, I will discuss the
+various things we can define, and what is expected of us.
+
+I'm using the basic taxonomy of definitions used by the \Mizar\ proof
+assistant, since it reflects the taxonomy used by working mathematicians
+(albeit implicitly). This taxonomy is, more or less, exhaustive.
+
+Again, skim this subsection, and return to it as needed.
+
+\subsubsection{Terms} Remember, in first-order logic, we have ``objects''
+be called ``terms'' and they are either constants or parametrized by
+finitely many terms. For example $0$ is a constant. The set $\NN$ of
+natural numbers is a constant. For any set $X$, the set of all its
+subsets $\powerset{X}$ is a constant parametrized by $X$.
+
+When we define a new term with $n\geq0$ parameters, call it $t(x_{1},\dots,x_{n})$, there are two propositions we must prove
+immediately:
+\begin{enumerate}
+\item Existence: for any $x_{1}$, \dots, $x_{n}$, there exists at least one such $t(x_{1},\dots,x_{n})$
+\item Uniqueness: for any $x_{1}$, \dots, $x_{n}$, if there are two possible such terms $t_{1}(x_{1},\dots,x_{n})$ and
+  $t_{2}(x_{1},\dots,x_{n})$, then we have $t_{1}(x_{1},\dots,x_{n})=t_{2}(x_{1},\dots,x_{n})$.
+\end{enumerate}
+If we do not prove these things, then we might not have such a term
+exist at all. In that case, if it appears in a formula, we can end up
+with contradictions (since $\exists t,\dots$ produces a contradiction,
+no such $t$ exists) or vacuous truths (since $\forall t,\dots$ is the
+same as the ``empty conjunction'' which is always true). For this
+reason, proving existence and uniqueness is sometimes referred to
+proving this term is \emph{well-formed}.
+
+\subsubsection{Predicates} A ``predicate'' is a ``proposition''
+parametrized by finitely many terms. I will generically write a
+predicate as $\mathcal{P}[x_{1},\dots,x_{n}]$ using square brackets (to
+distnguish it from a function $f(x_{1},\dots,x_{n})$).
+
+Predicates are used to form ``propositions'', or more precisely
+\emph{formulas} which are either true or false. We will state some
+formulas which are taken as specifying the behaviour of this $\in$
+predicate, and introduce some useful abbreviations to facilitate working
+with sets. 
+
+\subsubsection{Types}
+We can introduce new nouns or ``types''. For example, we will work in
+set theory, and we stipulate the existence of a type called ``sets''. We
+can define a new type, for any set $X$ we can introduce the type
+``subset of $X$''.
+
+We need to prove the existence of at least one term having this type. So
+for any set $X$, there exists at least one subset of $X$. We need to do
+this for the same reason for terms, so we can quantify over terms having
+this type.
+
+Types can be used to form propositions of the form ``[term] $t$ is
+[type] $T$'' or ``[term] $t$ is not [type] $T$''. A term can have
+multiple types in practice\footnote{Other foundations of mathematics has
+difficulty with this, which causes them to introduce a lot of
+unintuitive detritis. The way to approach this is to introduce a notion
+of \emph{soft types} which are predicates of terms.}.
+
+\begin{remark}[Primitive types in working mathematics]
+In practice, there is a ``root'' type which we vaguely call ``object''
+since \emph{everything} in mathematics is a ``mathematical object''.
+We can then begin by observing set theory introduces a new type, ``set''
+which is a subtype of ``object''. One of the implicit axioms of set
+theory is that ``For all objects $x$, we have $x$ is a set''. No one
+really explicitly states this, but I think it's worth mentioning.
+\end{remark}
+
+\subsubsection{Adjectives}
+We have ``type modifiers'', also called ``adjectives''. These are
+literally adjectives. For example, in set theory, we have ``empty'' be
+an adjective. Adjectives are distinguished by the ability to prefix them
+by ``non'' to get another adjective (e.g., ``nonempty'' is another
+adjective of sets).
+
+In practice, if we have a type $T$ and define an adjective $\alpha$ for
+it, then we should prove there exists a term of type $\alpha T$. This
+allows us to quantify over terms of type $\alpha T$.
+
+We can use adjectives to form propositions by saying ``[term] $t$ is
+[adjective] $\alpha$''. For example, ``The set $X$ is nonempty''. We can
+also form the proposition ``$t$ is not $\alpha$'' (e.g., ``The set $Y$
+is not nonempty'').
+
+\subsubsection{$\star$Structures}
+This is starred because we won't run across them in set theory, but it's
+good to note they exist. A ``structure'' is usually presented as a tuple
+of heterogeneous data in mathematics. For example, a group can be
+specified using the structure $\langle G,\circ\rangle$ where $G$ is a
+nonempty set and $\circ\colon G\times G\to G$ is a binary operator on $G$.
+Structures use these angled braces.
+
+Two structures of the same species are equal if and only if their
+components are equal (just like ordered tuples).
+
+There are no proof obligations for definitions of structures.
+
+We encounter them in other forms of mathematics. One subtlety is that
+the same notion (like a Group) can be formalized using different
+structures. For example, we could use instead $\langle G,\circ,(-)^{-1}\rangle$
+where $(-)^{-1}\colon G\to G$ is a unary operator satisfying, for any
+$x\in G$, $x\circ x^{-1}=x^{-1}\circ x=1$. Or we could use the structure
+$\langle G,\circ,(-)^{-1},1\rangle$ where $1\in G$ is a constant. Any of
+these possibilities are acceptable, and alter our future definitions (in
+group theory) slightly.
+
+Again, this is a curio due to historical accident and contingency. In
+practice, and John \textsc{Baez} and Jim \textsc{Dolan} noted, most
+mathematicians bundle a structure together with axioms following a
+``template'' for definitions that looks like: ``A \textit{gadget}
+consists of \textsc{stuff} equipped with \textsc{structure} satisfying
+\textsc{properties}'' where the \textsc{stuff} and \textsc{structure}
+together form the components of a structure as we have defined it. The
+\textsc{properties} are a list of equations or axioms which we demand of
+the \textsc{stuff} and \textsc{structure}.
+
+We don't need to prove anything when defining a structure. It gives us a
+new type, and we can define adjectives for them.
+
+\subsection{First-Order Logic}
+We have mentioned in passing that first-order logic has propositions and
+terms. Terms are ``objects'' or ``objects parametrized by finitely many
+objects''. We have the usual logical connectives:
+\begin{enumerate}
+\item $\bot$ = \textit{falsum} or contradiction, a constant proposition which is
+  always false;
+\item $\top$ = \textit{verum}, a constant proposition which is always true;
+\item $\neg\phi$ = ``not $\phi$'', the logical negation of $\phi$;
+\item $\phi\land\psi$ = ``$\phi$ and $\psi$'', the conjunction of propositions;
+\item $\phi\lor\psi$ = ``$\phi$ or $\psi$ (or both)'', the disjunction
+  of propositions;
+\item $\phi\implies\psi$ = ``$\phi$ implies $\psi$'', logically
+  equivalent to $(\neg\phi)\lor\psi$;
+\item $\phi\iff\psi$ = ``$\phi$ if and only if $\psi$'', asserts the
+  logical equivalence of the two formulas, and it is just an
+  abbreviation for the formula $(\phi\implies\psi)\lor(\psi\implies\phi)$.
+\end{enumerate}
+We also have quantifiers
+\begin{enumerate}
+\item $\forall x,\mathcal{P}[x]$ = ``for all $x$, we have
+  $\mathcal{P}[x]$'' and we call $\forall$ the universal quantifier;
+\item $\exists x,\mathcal{P}[x]$ = ``there exists an $x$ such that
+  $\mathcal{P}[x]$'' and we call $\exists$ the existential quantifier.
+\end{enumerate}
+In practice, universal quantifiers occur frequently, and we just sweep
+them away with linguistics, writing propositions of the form ``Let $x$
+be a [type] $T$. Then $\mathcal{P}[x]$.'' This is equivalent to the
+proposition
+\begin{equation}
+\forall x, (x\mbox{ is a }T\implies\mathcal{P}[x]).
+\end{equation}
+
+\subsubsection{$\star$Proof steps}
+We can now give the basic proof steps, which depends on the claim being
+made. The exact linguistic phrases vary but we can offer the following
+taxonomy (following the terminology found in Wiedijk~\cite{wiedijk-2000-mv},
+being inspired in turn by \Mizar).
+
+Justifications are needed by some proof steps, which usually take the
+form ``by\dots'' and references theorems, definitions, and/or
+equations. We can refer the immediately previous proof step by prefixing
+steps with ``then\dots''.
+
+The point of the rest of this section is to show that there are only
+finitely possible steps in a proof. The exact terminology used in
+practice varies, since English is a natural language, and repeating
+identically worded proof steps is rather tedious.
+
+Also note that this basically translates the ``natural deduction'' proof
+calculus into English prose.
+
+\subsubsection{Let}
+When we want to prove $\forall x,P[x]$ we typically begin by saying
+``Let $x$''. Or if we want to prove $\forall x,x\mbox{ is a }T\implies P[x]$,
+we can say ``Let $x$ be a $T$'' and then continue on to prove $P[x]$.
+\begin{verse}
+$\langle${\em proof of \/}$\forall x,P[x]\rangle \equiv$\\*
+%\smallskip
+\qquad $\langle${\em preliminary steps\/}$\rangle$\\*
+\qquad \verb|let |$y$\verb|;|\\*
+\qquad $\langle${\em proof of \/}$P[y]\rangle$\\*
+\end{verse}
+
+\subsubsection{Assume}
+If we want to prove $A\implies B$, then we begin by saying ``Assume $A$.''
+Then we just need to prove $B$.
+\begin{verse}
+$\langle${\em proof of \/}$A\implies B\rangle \equiv$\\*
+%\smallskip
+\qquad $\langle${\em preliminary steps\/}$\rangle$\\*
+\qquad \verb|assume |$A$\verb|;|\\*
+\qquad $\langle${\em proof of \/}$B\rangle$\\*
+\end{verse}
+We can also use ``assume'' to prove negations, since $\neg\phi$ is
+logically equivalent to $\phi\implies\bot$ (or $\phi$ implies
+\textit{falsum}/contradiction).
+
+\begin{xca}
+Write down the truth table for $\neg\phi$ and $\phi\implies\bot$ and
+prove to yourself that they are equivalent.
+\end{xca}
+
+\subsubsection{Thus}
+We conclude proofs by saying something of the form ``Thus $B$'' or
+``Thus $A$''. For claims of conjunctions, we need to prove each clause
+separately, and have a separate ``thus'' for each clause. We need to
+cite some justification (``by\dots'') or offer a nested subproof.
+\begin{verse}
+$\langle${\em proof of \/}$A\wedge B\rangle \equiv$\\*
+%\smallskip
+\qquad $\langle${\em preliminary steps\/}$\rangle$\\*
+\qquad \verb|thus |$A$\verb| by |$\ldots$\verb|;|\\*
+\qquad $\langle${\em proof of \/}$B\rangle$\\*
+\end{verse}
+\textbf{Note:} if we want to use the previous step, we don't say ``Then
+thus $A$''. Mathematicians say ``Hence $A$''. Usually, in practice, ``hence'' is
+used to refer ambiguously to previous steps.
+
+\subsubsection{Per Cases}
+The last logical connective we need to consider is ``using'' disjunction
+$A_{1}\lor\dots\lor A_{n}$ as a premise in a claim
+$(A_{1}\lor\dots\lor A_{n})\implies B$. We need to prove that
+$A_{1}\lor\dots\lor A_{n}$ has been proven (this is the justification
+``by\dots'' in the ``per cases'' statement), then we produce a proof by
+cases, which has the form:
+\begin{verse}
+$\langle${\em proof of \/}$B\rangle \equiv$\\*
+%\smallskip
+\qquad $\langle${\em preliminary steps\/}$\rangle$\\*
+\qquad \verb|per cases by |$\ldots$\verb|;|\\*
+\qquad \verb|suppose |$A_1$\verb|;|\\*
+\qquad\quad $\langle${\em proof of \/}$B$ {\em from \/}$A_1\rangle$\\*
+\qquad $\ldots$\\*
+\qquad \verb|suppose |$A_n$\verb|;|\\*
+\qquad\quad $\langle${\em proof of \/}$B$ {\em from \/}$A_n\rangle$\\*
+\end{verse}
+We sometimes write ``case $A_{i}$'' instead of ``suppose $A_{i}$''.
+
+\subsubsection{Consider}
+If we want to use the fact that $\exists x,P[x]$, then we need to
+introduce a name for the term which satisfies $P[x]$. This is done by
+the \verb|consider| proof step, and justify it by referencing where we
+have proven $\exists x,P[x]$. This proof step takes the form:
+\begin{verse}
+$\langle${\em proof of \/}$A\rangle \equiv$\\*
+%\smallskip
+\qquad $\langle${\em preliminary steps\/}$\rangle$\\*
+\qquad \verb|consider |$x$\verb| such that |$P[x]$\verb| by |$\ldots$\verb|;|\\*
+\qquad $\langle${\em proof of \/}$A\rangle$\\*
+\end{verse}
+
+\subsubsection{Take}
+When we want to prove $\exists x,P[x]$, we will need to offer the term
+$t$ which satisfies $P[t]$. This is done by the \verb|take| proof step,
+which has the form
+\begin{verse}
+$\langle${\em proof of \/}$\exists x\,P[x]\rangle \equiv$\\*
+%\smallskip
+\qquad $\langle${\em preliminary steps\/}$\rangle$\\*
+\qquad \verb|take |$a$\verb|;|\\*
+\qquad $\langle${\em proof of \/}$P[a]\rangle$\\*
+\end{verse}
+
+\subsubsection{That's it!}
+That's all the proof steps which are possible. As you can see, the
+choice of proof step is constrained by what you're trying to prove. The
+\emph{art} of mathematics is that you need to determine the claim that's
+being proven. Usually it's straightforward, but other times it's easier
+to prove the contrapositive (i.e., instead of $\phi\implies\psi$, you
+might want to prove $\neg\psi\implies\neg\phi$) or proof by
+contradiction (i.e., instead of $\phi$, you want to prove
+$\neg\phi\implies\bot$). Almost always, you want to go back to the
+definitions, and just keep unfolding definitions until you are finished.

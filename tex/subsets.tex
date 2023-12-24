@@ -1,0 +1,149 @@
+\section{Subsets and Set Equality}
+
+\begin{definition}
+Let $A$ and $B$ be sets. We define a new infixed predicate $A\subset B$
+(read ``$A$ is a subset of $B$'') to mean:
+\begin{equation}\label{eq:def:subset}
+A\subset B\iff\mbox{for all objects $x$, if $x\in A$, then $x\in B$.}
+\end{equation}
+\end{definition}
+
+Equation~\ref{eq:def:subset} is a ``definitional theorem'' which states
+a logical equivalence of $A\subset B$ with the formula ``for all objects
+$x$, if $x\in A$, then $x\in B$''.
+
+\begin{definition}
+Let $\phi$ and $\psi$ be formulas. A \define{Logical Equivalence} of
+$\psi$ with $\phi$ is a formula written $\psi\iff\phi$ (read ``$\psi$ if
+and only if $\phi$''). This is an abbreviation of the formula
+$(\psi\implies\phi)\land(\phi\implies\psi)$ (read ``$\psi$ implies
+$\phi$, and [$\land$] $\phi$ implies $\psi$''). In practice, this means
+we can replace any instance of $\psi$ by $\phi$, and vice-versa.
+\end{definition}
+
+\begin{xca}
+If $\phi\iff\psi$ and $\neg\psi$ (the negation of $\psi$) are both
+proven, then is $\neg\phi$ true? Write down the truth table to find out.
+\end{xca}
+
+Now, when it comes to proving things in mathematics, the basic step is
+to return to the definition of the concepts involved.
+
+\begin{definition}
+Let $A$ and $B$ be sets. We define the predicate \define{Set Equality},
+written $A=B$, as
+\begin{equation}\label{eq:def:set-equality}
+A=B\iff\mbox{for all objects $x$, we have $x\in A\iff x\in B$}.
+\end{equation}
+\end{definition}
+
+\begin{remark}
+This is a lie, it's not a definition, but it's an axiom. Sometimes there
+is a fine line separating the two, other times they are
+indistinguishable! In practice, we really don't care too much, but I
+thought I should be honest about these things.
+\end{remark}
+
+OK, so we have two definitions, and we're relating them in the following
+proposition:
+
+\begin{proposition}
+Let $A$ and $B$ be sets.
+Then $A=B$ if and only if $A\subset B$ and $B\subset A$.
+\end{proposition}
+
+What do we do? Well an ``if and only if'' statement requires proving two
+claims:
+\begin{enumerate}
+\item If $A=B$, then $A\subset B$ and $B\subset A$
+\item If $A\subset B$ and $B\subset A$, then $A=B$.
+\end{enumerate}
+The first case is usually indicated by writing $(\Longrightarrow)$ to
+indicate which implication is being proven. We prove a formula like ``If
+$\phi$, then $\psi$'' by beginning with ``Assume $\phi$ is true.'' Then
+we try to infer $\psi$ somehow.
+
+Our only two tricks in mathematics is (a) return to the definition, and
+(b) assume the claim is false, then try to derive a contradiction (``If
+this isn't true, nothing's true'' --- otherwise known as ``proof by
+contradiction''). For us, it suffices to return to the definition, and
+use the logical equivalence. I will ``think aloud'' in the square
+bracketed ``asides'' and demonstrate how I think about proving things.
+
+\begin{proof}[Proof $(\Longrightarrow)$]
+Let $A$ and $B$ be a set. Assume $A=B$. [OK, great, now we return to the
+definition.] Then by Eq~\eqref{eq:def:set-equality}, for all objects
+$x$, we have $x\in A$ if and only if $x\in B$. [Now, we use the fact
+that $\forall x,\phi\iff\psi$ is logically equivalent to
+$(\forall x,\phi\implies\psi)\land(\forall x,\phi\impliedby\psi)$.]
+Then every object\footnote{We contract ``For all objects $a$, if $a\in A$, then\dots''
+into the more succinct statement ``Every object $a\in A$ satisfies\dots''.
+This is a conventional abbreviation.}
+$a\in A$ satisfies $a\in B$, and every object $b\in B$
+satisfies $b\in A$. [Now we see the first part of the sentence is
+  precisely saying ``For all objects $a$, if $a\in A$ then $a\in B$, 
+which is the right-hand side of Eq~\eqref{eq:def:subset}; similarly, the
+second part of the sentence is the right-hand side of
+Eq~\eqref{eq:def:subset}. We therefore appeal to the definition of
+subsets to infer:]
+Then $A\subset B$ and $B\subset A$.
+\end{proof}
+
+Thus we have established, ``If $A=B$, then $A\subset B$ and $B\subset A$.''
+We need to prove the opposite implication, ``If $A\subset B$ and
+$B\subset A$, then $A=B$.'' This amounts to unfolding the definitions.
+
+\begin{proof}[Proof $(\Longleftarrow)$]
+Let $A$ and $B$ be sets. Assume $A\subset B$ and $B\subset A$. [Now, we
+want to prove $A=B$. We begin by rewriting our assumptions using
+Eq~\eqref{eq:def:subset}.] Then for all objects $a$, if $a\in A$ then
+$a\in B$; and for all objects $b$, if $b\in B$ then $b\in A$. [Now we
+use the logical equivalence that $(\forall a,\phi[a]\implies\psi[a])\land(\forall b,\psi[b]\implies\phi[b])\iff(\forall x,\phi[x]\iff\psi[x])$
+where we write unary predicate with square brackets $\phi[x]$ and
+reserve parentheses for functions.] Then for all objects $x$, if $x\in A$ then
+$x\in B$, and if $x\in B$ then $x\in A$. [Now we use the definition of
+$\iff$ to rewrite this formula.] Then for all objects $x$, we have $x\in A$
+if and only if $x\in B$. [Now we invoke the definitional theorem Eq~\ref{eq:def:set-equality}
+since our current claim is the right-hand side of the equation.]
+Then $A=B$.
+\end{proof}
+
+\begin{remark}
+Observe, we just produced a proof without even knowing what the
+predicate $\in$ means. That's perfectly alright! Arguably, the art of
+mathematics is the ability to reason about things \emph{without} know
+the full details, but only working with precise specifications of
+certain terms.
+\end{remark}
+
+Now, one more piece of terminology before we end this section:
+\begin{definition}\label{def:proper-subset}
+Let $A$ and $B$ be sets. We say $A$ is a \define{Proper Subset} of $B$
+if $A\subset B$ and $A\neq B$. In this case, we write $A\propersubset B$
+(in direct analogy to the notation $\leq$ and $<$).
+\end{definition}
+
+\begin{xca}
+What is the definitional theorem for Definition~\ref{def:proper-subset}?
+\end{xca}
+
+\begin{notation}
+We write ``$x\notin A$'' for ``not $x\in A$'' (or ``$\neg(x\in A)$'').
+We also write ``$A\nsubset B$'' for ``not $A\subset B$'' or ``$A$ is not
+a subset of $B$''. We write
+``$A\neq B$'' for ``not $A=B$'' (i.e., ``$A$ is not equal to
+$B$''). Similarly we write ``$A\not\propersubset B$'' for ``$A$ is not a
+proper subset of $B$''.
+\end{notation}
+
+\begin{xca}
+Prove or find a counter-example: for any sets $A$ and $B$, if
+$A\nsubseteq B$, then there exists an object $b$ such that $b\in B$ and 
+$b\notin A$. (Here we use the notation $b\notin A$ for ``not $b\in A$'')
+\end{xca}
+
+\begin{xca}
+Prove or find a counter-example: for any sets $A$ and $B$, if
+$A\propersubset B$, then there exists an object $b$ such that $b\in B$
+and $b\notin A$. 
+\end{xca}

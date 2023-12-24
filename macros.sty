@@ -1,0 +1,47 @@
+\usepackage{amsthm,amssymb,amsfonts}
+\RequirePackage[dvipsnames]{xcolor}
+%\RequirePackage{ifpdf}
+%\RequirePackage[\ifpdf\else dvipdfmx\fi]{hyperref}
+\RequirePackage{hyperref}
+% eTeX uses this color for links, it's better than BrickRed imho
+\definecolor{linkRed}{cmyk}{0.28, 1, 1, 0.35}
+\hypersetup{colorlinks=true,
+    linkcolor=linkRed,
+    citecolor=linkRed,
+    filecolor=linkRed,
+    urlcolor=linkRed
+    %% pdfinfo={
+    %%   Title={Formalizing Finite Groups in Mizar},
+    %%   Author={Alex Nelson},
+    %%   CreationDate={D:20211214152256},
+    %%   ModDate={D:\pdfdate}
+    %% }
+}
+
+\numberwithin{equation}{section}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{xca}{Exercise}
+\newtheorem{notation}[theorem]{Notation}
+
+\newtheoremstyle{myrem}%name
+ {3pt}%Space above
+ {3pt}%Space below
+ {\addtolength{\@totalleftmargin}{2\parindent}
+   \addtolength{\linewidth}{-2\parindent}
+   \parshape 1 2\parindent \linewidth\small}%Body font
+ { }%Indent amount
+ {\itshape}% Theorem head font
+ {.}%Punctuation after theorem head
+ { }%Space after theorem head 2
+ {}%Theorem head spec (can be left empty, meaning 'normal')
+
+\theoremstyle{myrem}
+\newtheorem{remark}[theorem]{Remark}
+
