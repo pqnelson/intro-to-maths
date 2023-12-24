@@ -24,6 +24,7 @@
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{scheme}[theorem]{Scheme}
 
 \theoremstyle{definition}
 \newtheorem{definition}[theorem]{Definition}
@@ -45,3 +46,8 @@
 \theoremstyle{myrem}
 \newtheorem{remark}[theorem]{Remark}
 
+\newcommand\solution[1]{\medbreak\noindent\textbf{Solution to Exercise~\ref{#1}.}\enspace\ignorespaces}
+\def\endsolution{\vfill\eject}
+
+\newcommand\hint[1]{\medbreak\noindent\textbf{Hint for Exercise~\ref{#1}.}\enspace\ignorespaces}
+\def\endhint{\vfill\eject}

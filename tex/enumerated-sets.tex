@@ -1,0 +1,67 @@
+\section{Enumerated Sets}
+
+\begin{definition}
+Let $y$ be any object. We define the term $\{y\}$ to be the set
+satisfying
+\begin{equation}\label{enum:def:singleton}
+\mbox{for all objects $x$, we have }x\in\{y\}\iff x=y.
+\end{equation}
+\end{definition}
+
+\begin{definition}
+Let $y$ and $z$ be objects. We define the term $\{y,z\}$ to be the set
+satisfying
+\begin{equation}\label{enum:def:unordered-pair}
+\mbox{for all objects $x$, we have }x\in\{y,z\}\iff x=y\mbox{ or }x=z.
+\end{equation}
+\end{definition}
+
+\begin{proposition}
+For any object $x$, we have $\{x\}=\{x,x\}$.
+\end{proposition}
+
+OK, what are we trying to prove? Ultimately, we are trying to prove two
+sets are equal to each other. This requires invoking the definition of
+set equality as stated in Eq~\eqref{eq:def:set-equality} or the
+equivalent criterion found in
+Proposition~\ref{prop:subsets:equiv-set-equality} (but this will, in
+turn, require invoking Eq~\ref{eq:def:subset} for the definition of subsets).
+
+\begin{proof}
+Let $x$ be any object. [Now we want to prove $\{x\}=\{x,x\}$, which if
+we used Eq~\eqref{eq:def:set-equality} transforms our obligation into
+the claim ``For all objects $y$, we have $y\in\{x\}$ if and only if
+$y\in\{x,x\}$''.]
+Let $y$ be an arbitrary object. We will prove $y\in\{x\}$ if and only if
+$y\in\{x,x\}$.
+
+Assume $y\in\{x\}$. Then by Eq~\eqref{enum:def:singleton}, $y=x$. [Then
+$y=x$ or $y=x$.] Hence by Eq~\eqref{enum:def:unordered-pair}, $y\in\{x,x\}$
+[This proves the claim, ``If $y\in\{x\}$, then $y\in\{x,x\}$.'']
+
+Now assume $y\in\{x,x\}$. [We will prove $y\in\{x\}$.]
+Then by Eq~\eqref{enum:def:unordered-pair}, $y=x$ or $y=x$. [But since
+these are identical conditions, we can use the logical equivalence
+$(A\lor A)\iff A$ and obtain:] Then $y=x$. Hence by Eq~\eqref{enum:def:singleton}
+$y\in\{x\}$ as desired. [This proves the claim, ``If $y\in\{x,x\}$,
+then $y\in\{x\}$''.]
+
+Since $y$ has been left arbitrary, these two paragraphs establish the
+claim ``For any object $y$, we have $y\in\{x\}$ if and only if $y\in\{x,x\}$.''
+Therefore, by Eq~\eqref{eq:def:set-equality}, we conclude $\{x\}=\{x,x\}$
+as desired.
+\end{proof}
+
+\begin{xca}
+Can you offer a definition for a set $\{x,y,z\}$ for any objects $x$,
+$y$, and $z$?
+\end{xca}
+
+\begin{xca}\label{xca:enumerated-sets:singleton-subsets-of-singleton}
+Prove or find a counter-example: For all objects $x$ and $y$, if
+$\{x\}\subset\{y\}$, then $x=y$.
+\end{xca}
+
+\begin{xca}\label{xca:enum:singleton-subset-unordered-pair}
+Prove or find a counter-example: For all objects $x$ and $y$, we have $\{x\}\subset\{x,y\}$.
+\end{xca}

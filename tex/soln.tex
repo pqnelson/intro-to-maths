@@ -1,0 +1,206 @@
+\section{Solutions to Exercises}
+
+\subsection{Introduction} Well, this amounts to writing down truth
+tables, so you should be able to do it.
+
+\subsection{Subsets and Set Equality} \
+
+\begin{solution}{xca:subsets:def-thm-for-proper-subset}
+  For $A\propersubset B$, its definitional theorem is technically:
+\begin{equation}
+\mbox{for all sets $A$ and $B$, } A\propersubset B\quad\iff\quad A\subset B\;\land\; A\neq B.
+\end{equation}
+We usually suppress the outermost universal quantifiers.
+\end{solution}
+
+
+\begin{solution}{xca:proper-subsets-in-terms-of-improper-subsets}
+We will prove: For any sets $A$ and $B$, $A\propersubset B$ if and only
+if $A\subset B$ and $B\nsubset A$.
+
+\begin{proof}
+Let $A$ and $B$ be sets.
+
+Claim 1: If $A\propersubset B$, then $A\subset B$ and $B\nsubset A$.
+\begin{proof}[Subproof of Claim 1]
+  Assume $A\propersubset B$. Then
+  \begin{subequations}
+    \begin{equation}\label{soln:bool:proper-subsets-in-terms-of-improper-subsets:step1}
+A\subset B
+    \end{equation}
+    and
+    \begin{equation}
+A\neq B
+    \end{equation}
+by Definition~\ref{def:proper-subset}.
+  \end{subequations}
+But $A\neq B$ is logically equivalent to not ($A\subset B$ and $B\subset A$)
+by Proposition~\ref{prop:subsets:equiv-set-equality}.
+Then either $A\nsubset B$ or $B\nsubset A$ by de Morgan's law.
+But we have $A\subset B$ by Eq~\eqref{soln:bool:proper-subsets-in-terms-of-improper-subsets:step1}, therefore we are forced to conclude $B\nsubset A$.
+Hence we have proved $A\subset B$ and $B\nsubset A$.
+\end{proof}
+Claim 2: If $A\subset B$ and $B\nsubset A$, then $A\propersubset B$.
+\begin{proof}[Subproof of Claim 2]
+Assume $A\subset B$ and $B\nsubset A$. We want to prove $A\subset B$ and
+$A\neq B$ by Definition~\ref{def:proper-subset}. But we assumed
+$A\subset B$, so we really just need to prove $A\neq B$.
+We can use Proposition~\ref{prop:subsets:equiv-set-equality} to use the
+logical equivalence $A\neq B$ if and only if either $A\nsubset B$ or
+$B\nsubset A$. We assumed $B\nsubset A$. Therefore we can infer $A\neq B$.
+Hence we find $A\propersubset B$.
+\end{proof}
+Thus we have proved $A\propersubset B$ if and only if $A\subset B$ and
+$B\nsubset A$ by Claims 1 and 2.
+\end{proof}
+\end{solution}
+
+
+\begin{solution}{xca:subsets:proper-subsets-do-not-contain-some-object}
+\textit{Prove or find a counter-example: for any sets $A$ and $B$, if
+$A\nsubseteq B$, then there exists an object $b$ such that $b\in B$ and 
+$b\notin A$. (Here we use the notation $b\notin A$ for ``not $b\in A$'')}
+
+Let $A$ be any nonempty set. There exists a proper subset
+$B\propersubset A$ ($B$ could be the empty set).
+Consider $B\propersubset A$.
+Then $A\nsubseteq B$ and there is no $b\in B$
+such that $b\notin A$.
+
+So we found a counter-example to the claim.
+\end{solution}
+
+
+\begin{solution}{xca:subsets:proper-subsets-missing-something}
+\textit{Prove or find a counter-example: for any sets $A$ and $B$, if
+$A\propersubset B$, then there exists an object $b$ such that $b\in B$
+and $b\notin A$.}
+
+Let us try to prove it directly.
+Let $A$ and $B$ be sets. Assume $A\propersubset B$. Then by previous exercises, $A\subset B$ and $B\nsubseteq A$.
+
+Then $B\nsubseteq A$.
+
+Then not $B\subset A$.
+
+Then not (for any objects $x$, if $x\in B$, then $x\in A$) by Definition~\eqref{eq:def:subset}.
+
+Then there exists an object $x$ such that not (if $x\in B$ then $x\in A$)
+by de Morgan's law.
+
+Then there exists an object $x$ such that not (either not $x\in B$, or
+$x\in A$) by ($\phi\implies\psi$ is logically equivalent to $\neg\phi\lor\psi$).
+
+Then there exists an object $x$ such that both $x\in B$ and $x\notin A$
+by de Morgan's other law, and double negation.
+
+Hence there exists an object $x$ such that $x\in B$ and $x\notin A$.
+\end{solution}
+
+
+\subsection{Enumerated Sets} \
+
+\begin{solution}{xca:enumerated-sets:singleton-subsets-of-singleton}
+For all objects $x$ and $y$, if $\{x\}\subset\{y\}$, then $x=y$.
+
+\begin{proof}
+Let $x$ and $y$ be objects. Assume $\{x\}\subset\{y\}$. [Now we unfold
+the definition of $\subset$.]
+Then by Eq~\eqref{eq:def:subset}, for all objects $z$, if $z\in\{x\}$,
+then $z\in\{y\}$. [Now, we unfold the definition of singleton set for the premise.]
+Then by Eq~\eqref{enum:def:singleton}, for all objects $z$, if $z=x$,
+then $z\in\{y\}$.
+Then we have $x\in\{y\}$.
+Then by Eq~\eqref{enum:def:singleton}, $x=y$.
+Hence we have obtained $x=y$.
+\end{proof}
+\end{solution}
+
+\begin{solution}{xca:enum:singleton-subset-unordered-pair}
+For all objects $x$ and $y$, we have $\{x\}\subset\{x,y\}$.
+\begin{proof}
+Let $x$, $y$ be objects.
+For any object $z$, if $z\in\{x\}$, then $z\in\{x,y\}$.
+\begin{proof}[Subproof]
+Let $z$ be an object. Assume $z\in\{x\}$. Then $z=x$ by Eq~\eqref{enum:def:singleton}.
+Then $z=x$ or $z=y$.
+Hence $z\in\{x,y\}$ by Eq~\eqref{enum:def:unordered-pair}.
+\end{proof}
+\noindent Hence $\{x\}\subset\{x,y\}$ by Eq~\eqref{eq:def:subset}.
+\end{proof}
+\end{solution}
+
+\subsection{Boolean Properties of Sets } \
+
+\begin{solution}{xca:bool:empty-is-adjective}
+We see that ``empty'' is an adjective of sets. In general, whenever a
+definition takes the form ``Let $t$ be a [type] $T$. We say $t$ is
+$\alpha$ to mean\dots'', it's almost certainly defining an adjective.
+
+Another heuristic is to see if it makes sense to say aloud ``non-$\alpha$''.
+If so, then it's probably an adjective.
+\end{solution}
+
+\begin{solution}{xca:bool:subsets-of-empty-set-are-empty}
+For any set $X$, if $X\subset\emptyset$, then $X=\emptyset$.
+
+\begin{proof}
+Let $X$ be a set. Assume $X\subset\emptyset$. [We will use
+Proposition~\ref{prop:subsets:equiv-set-equality} to change the proof
+goal from $X=\emptyset$ to $X\subset\emptyset$ and $\emptyset\subset X$.
+Since we have already assumed $X\subset\emptyset$, we see our proof goal
+requires us to prove $\emptyset\subset X$.]
+We have $\emptyset\subset X$ by Lemma~\ref{lemma:bool:empty-set-is-subset-of-any-set}.
+Then we have $X\subset\emptyset$ and $\emptyset\subset X$.
+Hence we conclude $X=\emptyset$ by Proposition~\ref{prop:subsets:equiv-set-equality}.
+\end{proof}
+\end{solution}
+
+
+\begin{solution}{xca:bool:modus-barbara}
+We want to prove ``For any sets $X$, $Y$, and
+$Z$, if $X\subset Y$ and $Y\subset Z$, then $X\subset Z$.''
+
+Let $X$, $Y$, $Z$ be sets. Assume $X\subset Y$ and $Y\subset Z$.
+We want to prove $X\subset Z$. [This requires returning to the
+Definition of subset, specifically the definitional theorem Eq~\eqref{eq:def:subset}.
+We will want to prove ``For all objects $x$, if $x\in X$, then $x\in Z$''.]
+So for all objects $x$, if $x\in X$ then $x\in Y$; and for all objects
+$y$, if $y\in Y$, then $y\in Z$.
+
+We claim for all objects $x$, if $x\in X$, then $x\in Z$.
+\begin{proof}
+Let $x$ be an
+arbitrary object. Assume $x\in X$. Then by assumption $X\subset Y$, we
+see $x\in Y$ using Eq~\eqref{eq:def:subset}. Then using assumption
+$Y\subset Z$, we see $x\in Z$ using Eq~\eqref{eq:def:subset}. Hence $x\in Z$
+as desired. This proves the claim.
+\end{proof}
+Then we use Eq~\eqref{eq:def:subset} to conclude $X\subset Z$.
+Hence we prove the result.
+\end{solution}
+
+%% \begin{solution}{xca:bool:modus-barbara}
+%% For any sets $X$, $Y$, $Z$, if $X\subset Y$ and $Y\subset Z$, then
+%% $X\subset Z$.
+
+%% \begin{proof}
+%%   Let $X$, $Y$, $Z$ be sets. Assume
+%%   \begin{subequations}
+%%     \begin{equation}
+%% X\subset Y
+%%     \end{equation}
+%% and
+%% \begin{equation}
+%% Y\subset Z.
+%% \end{equation}
+%%   \end{subequations}
+%%   For any object $x$, if $x\in X$, then $x\in Z$.
+%%   \begin{proof}[Subproof]
+%% Let $x$ be an object. Assume $x\in X$. Since $X\subset Y$, then by Eq~\eqref{eq:def:subset}
+%% $x\in Y$. Then, since $Y\subset Z$, we find $x\in Z$ by Eq~\eqref{eq:def:subset}.
+%% Hence we conclude $x\in Z$.
+%%   \end{proof}
+%% \noindent Hence we conclude $X\subset Z$ by Eq~\eqref{eq:def:subset}.
+%% \end{proof}
+%% \end{solution}

@@ -8,7 +8,7 @@ A\subset B\iff\mbox{for all objects $x$, if $x\in A$, then $x\in B$.}
 \end{equation}
 \end{definition}
 
-Equation~\ref{eq:def:subset} is a ``definitional theorem'' which states
+Equation~\eqref{eq:def:subset} is a ``definitional theorem'' which states
 a logical equivalence of $A\subset B$ with the formula ``for all objects
 $x$, if $x\in A$, then $x\in B$''.
 
@@ -47,7 +47,7 @@ thought I should be honest about these things.
 OK, so we have two definitions, and we're relating them in the following
 proposition:
 
-\begin{proposition}
+\begin{proposition}\label{prop:subsets:equiv-set-equality}
 Let $A$ and $B$ be sets.
 Then $A=B$ if and only if $A\subset B$ and $B\subset A$.
 \end{proposition}
@@ -123,8 +123,13 @@ if $A\subset B$ and $A\neq B$. In this case, we write $A\propersubset B$
 (in direct analogy to the notation $\leq$ and $<$).
 \end{definition}
 
-\begin{xca}
+\begin{xca}\label{xca:subsets:def-thm-for-proper-subset}
 What is the definitional theorem for Definition~\ref{def:proper-subset}?
+\end{xca}
+
+\begin{xca}\label{xca:proper-subsets-in-terms-of-improper-subsets}
+Prove or find a counter-example: for any sets $A$ and $B$,
+$A\propersubset B$ if and only if $A\subset B$ and $B\nsubseteq A$.
 \end{xca}
 
 \begin{notation}
@@ -136,13 +141,13 @@ $B$''). Similarly we write ``$A\not\propersubset B$'' for ``$A$ is not a
 proper subset of $B$''.
 \end{notation}
 
-\begin{xca}
+\begin{xca}\label{xca:subsets:proper-subsets-do-not-contain-some-object}
 Prove or find a counter-example: for any sets $A$ and $B$, if
 $A\nsubseteq B$, then there exists an object $b$ such that $b\in B$ and 
 $b\notin A$. (Here we use the notation $b\notin A$ for ``not $b\in A$'')
 \end{xca}
 
-\begin{xca}
+\begin{xca}\label{xca:subsets:proper-subsets-missing-something}
 Prove or find a counter-example: for any sets $A$ and $B$, if
 $A\propersubset B$, then there exists an object $b$ such that $b\in B$
 and $b\notin A$. 

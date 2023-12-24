@@ -1,0 +1,159 @@
+\section{Boolean Properties of Sets}
+
+\begin{xca}
+Let $\psi$ be any proposition. Write down the proof table for
+$\bot\implies\psi$. You should find this is a tautology (i.e., it is
+always true).
+\end{xca}
+
+We begin by introducing a new variant of a theorem called a
+\define{scheme}. It's like a theorem, but we allow arbitrary predicates
+or terms which we indicate using caligraphic font (e.g., $\mathcal{P}$,
+$\mathcal{F}$, $\mathcal{X}$, etc.).
+
+\begin{scheme}[Replacement]\label{sch:bool:replacement}
+Let $\mathcal{P}[-]$ be a unary predicate of sets, let $\mathcal{A}$ be
+a set.
+There exists a set $X$ such that for all objects $x$ we have $x\in X$ if
+and only if $x\in\mathcal{A}$ and $\mathcal{P}[x]$.
+\end{scheme}
+
+This is usally taken as an axiom in ZFC set theory. In
+Tarski--Grothendieck set theory, it can be derived as a theorem. We will
+accept it as an axiom: for any set $\mathcal{A}$ and predicate
+$\mathcal{P}[-]$, we can form a subset of $\mathcal{A}$ consisting of
+its elements which satisfy $\mathcal{P}[-]$. This makes sense.
+
+\begin{definition}
+Let $X$ be a set. We say $X$ is \define{empty} to mean
+\begin{equation}\label{eq:bool:def:empty}
+\mbox{for any object $x$, we have }x\notin X.
+\end{equation}
+\end{definition}
+
+\begin{xca}\label{xca:bool:empty-is-adjective}
+Is this defining an adjective or a predicate? Why?
+\end{xca}
+
+\begin{proposition}\label{prop:bool:existence-of-empty-set}
+There exists an empty set.
+\end{proposition}
+
+We will use the Scheme~\ref{sch:bool:replacement} and the axiom of
+choice (``Choose some set $A$ --- we know at least one exists, so choose
+it.'') The predicate will be $\mathcal{P}[x]=\bot$ constantly false. So
+what elements of $A$ satisfy this? None at all. This allows us to
+construct the set $X$ consisting of elements of $A$ which satisfy an
+impossible-to-satisfy predicate. Since there are no such elements of $A$,
+it follows that $X$ is empty.
+
+\begin{proof}
+We define the unary predicate of sets $\mathcal{P}[x]=\bot$.
+We define the constant set $\mathcal{A}$ to be selected by the axiom of
+choice. 
+Using Scheme~\ref{sch:bool:replacement}, consider the set $X$ such that
+\begin{subequations}
+\begin{equation}
+\mbox{for all objects $x$, we have $x\in X$}\iff\mbox{$x\in\mathcal{A}$ and $\mathcal{P}[x]$}.
+\end{equation}
+Now we unfold the definition of $\mathcal{P}[x]$
+\begin{equation}
+\mbox{for all objects $x$, we have $x\in X$}\iff\mbox{$x\in\mathcal{A}$ and $\bot$}.
+\end{equation}
+We use the logical equivalence $(A\land\bot)\iff\bot$,
+\begin{equation}
+\mbox{for all objects $x$, we have $x\in X$}\iff\bot.
+\end{equation}
+This is equivalent to the conjunction of $(x\in X)\implies\bot$ (which is $\neg(x\in X)$ or
+$x\notin X$) and $\bot\implies(x\in X)$ (which is vacuously true,
+because ``contradiction implies anything'', so we can discard this clause).
+Therefore this is equivalent to the statement
+\begin{equation}
+\mbox{for all objects $x$, we have }x\notin X.
+\end{equation}
+Then by using Eq~\eqref{eq:bool:def:empty}, we have
+\begin{equation}\label{eq:bool:conclusion-of-existence-of-empty-set}
+X\mbox{ is empty}.
+\end{equation}
+\end{subequations}
+Take $X$, and we conclude from Eq~\eqref{eq:bool:conclusion-of-existence-of-empty-set} that there exists an empty set.
+\end{proof}
+
+We will prove there exists exactly one empty set. Towards that end, we
+will prove some \emph{lemmas}. A ``lemma'' is a proposition which is
+used as a stepping stone towards a bigger result. The roadmap is if we
+want to prove there is a unique empty set, this means that for any two
+empty sets $A_{1}$ and $A_{2}$, then $A_{1}=A_{2}$. We have already
+established the existence of at least one empty set. (The bigger picture
+is we will define a term $\emptyset$ for the empty set.)
+
+\begin{lemma}\label{lemma:bool:empty-set-is-subset-of-any-set}
+Let $A$ be an empty set, let $B$ be any set (possibly empty, possibly nonempty). Then $A\subset B$.
+\end{lemma}
+
+What do we need to prove? Well, we are trying to prove one set is a
+subset of another, so we need to recall Eq~\eqref{eq:def:subset} for the
+definitional theorem for subsets. The goal is to prove ``For all objects
+$x$, if $x\in A$ then $x\in B$''.
+
+\begin{proof}
+Let $A$ be an empty set.
+Let $B$ be any set. [We will prove ``For any object $x$, if $x\in A$,
+then $x\in B$''.] Let $x$ be an arbitrary object.
+Assume
+\begin{equation}\label{eq:bool:pf-step:empty-set-is-contained-in-anything}
+x\in A.
+\end{equation}
+Now we want to prove $x\in B$. [What do we do?
+We have only one trick in our toolkit: return to the definition. Let us
+return to the definition of ``empty'' found in Eq~\eqref{eq:bool:def:empty}.]
+However, by Eq~\eqref{eq:bool:def:empty}, for any object $y$, we have
+$y\notin A$. This contradicts Eq~\eqref{eq:bool:pf-step:empty-set-is-contained-in-anything},
+and we can conclude $x\in B$ as desired.
+\end{proof}
+
+\begin{theorem}\label{thm:bool:uniqueness-of-empty-set}
+For any empty sets $A$ and $B$, we have $A=B$.
+\end{theorem}
+
+We are trying to prove two sets are equal. Towards that end, we will use
+the criteria established in Proposition~\ref{prop:subsets:equiv-set-equality}
+to have our proof obligation be ``$A\subset B$ and $B\subset A$''.
+We use the previous lemma twice.
+
+\begin{proof}
+Let $A$ and $B$ be empty sets. Now we will prove $A\subset B$ and
+$B\subset A$, then invoke Proposition~\ref{prop:subsets:equiv-set-equality}
+to conclude $A=B$.
+
+We see $A\subset B$ by Lemma~\ref{lemma:bool:empty-set-is-subset-of-any-set}
+and the fact that $A$ is empty.
+
+We see $B\subset A$ by Lemma~\ref{lemma:bool:empty-set-is-subset-of-any-set}
+and the fact that $B$ is empty.
+
+Therefore by Proposition~\ref{prop:subsets:equiv-set-equality}
+we conclude $A=B$.
+\end{proof}
+
+\begin{definition}
+We define the term $\emptyset$ to be the set such that $\emptyset$ is
+the empty set.
+\end{definition}
+
+We would normally need to prove the existence and uniqueness of
+$\emptyset$, but existence was proven in
+Proposition~\ref{prop:bool:existence-of-empty-set} and 
+uniqueness was proven in Theorem~\ref{thm:bool:uniqueness-of-empty-set}.
+Therefore, the term $\emptyset$ is well-defined.
+
+\begin{xca}\label{xca:bool:subsets-of-empty-set-are-empty}
+Prove or find a counter-example: for any set $X$, if $X\subset\emptyset$,
+then $X=\emptyset$.
+\end{xca}
+
+\begin{xca}\label{xca:bool:modus-barbara}
+Prove the \textit{Modus Barbara} syllogism: for any sets $X$, $Y$, and
+$Z$, if $X\subset Y$ and $Y\subset Z$, then $X\subset Z$.
+\end{xca}
+
